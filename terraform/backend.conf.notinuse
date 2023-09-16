@@ -1,0 +1,4 @@
+resource_group_name = "bacloudstorageacrg"
+storage_account_name = "bacloudterraform"
+container_name = "tfstate"
+key = "terraform.tfstate"

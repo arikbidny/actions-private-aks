@@ -1,0 +1,11 @@
+https://github.com/Azure-Samples/private-aks-cluster-terraform-devops/blob/main/terraform/modules/log_analytics/main.tf
+
+
+https://github.com/microsoft/MTC_IL/blob/main/terraform/mtc_kubernetes_aks/variables.tf
+
+
+https://learn.microsoft.com/en-us/samples/azure-samples/private-aks-cluster-terraform-devops/private-aks-cluster-terraform-devops/
+
+
+fixed
+ Status=400 Code="BadRequest" Message="Diagnostic settings does not support retention for new diagnostic settings."
