@@ -63,3 +63,47 @@ module "hub_network" {
   ]
 }
 
+######### AKS Network #############
+resource "azurerm_resource_group" "aks_rg" {
+  name     = var.aks_resource_group_name
+  location = var.location
+  tags     = var.tags
+}
+
+
+module "aks_network" {
+  source                       = "./modules/virtual_network"
+  resource_group_name          = azurerm_resource_group.aks_rg.name
+  location                     = var.location
+  vnet_name                    = var.aks_vnet_name
+  address_space                = var.aks_vnet_address_space
+  log_analytics_workspace_id   = module.log_analytics_workspace.id
+  log_analytics_retention_days = var.log_analytics_retention_days
+
+  subnets = [
+    {
+      name : var.default_node_pool_subnet_name
+      address_prefixes : var.default_node_pool_subnet_address_prefix
+      enforce_private_link_endpoint_network_policies : true
+      enforce_private_link_service_network_policies : false
+    },
+    {
+      name : var.additional_node_pool_subnet_name
+      address_prefixes : var.additional_node_pool_subnet_address_prefix
+      enforce_private_link_endpoint_network_policies : true
+      enforce_private_link_service_network_policies : false
+    },
+    {
+      name : var.pod_subnet_name
+      address_prefixes : var.pod_subnet_address_prefix
+      enforce_private_link_endpoint_network_policies : true
+      enforce_private_link_service_network_policies : false
+    },
+    {
+      name : var.vm_subnet_name
+      address_prefixes : var.vm_subnet_address_prefix
+      enforce_private_link_endpoint_network_policies : true
+      enforce_private_link_service_network_policies : false
+    }
+  ]
+}
