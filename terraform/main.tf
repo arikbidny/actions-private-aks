@@ -158,3 +158,15 @@ module "routetable" {
     }
   }
 }
+
+######### PRIVATE ACR FOR DOCKER IMAGES ##########################
+module "container_registry" {
+  source                     = "./modules/container_registry"
+  name                       = var.acr_name
+  resource_group_name        = azurerm_resource_group.rg.name
+  location                   = var.location
+  sku                        = var.acr_sku
+  admin_enabled              = var.acr_admin_enabled
+  georeplication_locations   = var.acr_georeplication_locations
+  log_analytics_workspace_id = module.log_analytics_workspace.id
+}
