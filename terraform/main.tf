@@ -135,3 +135,26 @@ module "firewall" {
   subnet_id                  = module.hub_network.subnet_ids["AzureFirewallSubnet"]
   log_analytics_workspace_id = module.log_analytics_workspace.id
 }
+
+
+######### ROUTE TABLE FOR AKS CLUSTER TO FIREWALL ##########################
+module "routetable" {
+  source              = "./modules/route_table"
+  resource_group_name = azurerm_resource_group.aks_rg.name
+  location            = var.location
+  route_table_name    = local.route_table_name
+  route_name          = local.route_name
+  firewall_private_ip = module.firewall.private_ip_address
+  subnets_to_associate = {
+    (var.default_node_pool_subnet_name) = {
+      subscription_id      = data.azurerm_client_config.current.subscription_id
+      resource_group_name  = azurerm_resource_group.aks_rg.name
+      virtual_network_name = module.aks_network.name
+    }
+    (var.additional_node_pool_subnet_name) = {
+      subscription_id      = data.azurerm_client_config.current.subscription_id
+      resource_group_name  = azurerm_resource_group.aks_rg.name
+      virtual_network_name = module.aks_network.name
+    }
+  }
+}
