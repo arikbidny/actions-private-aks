@@ -672,3 +672,55 @@ variable "script_name" {
   type        = string
   default     = "configure-jumpbox-vm.sh"
 }
+
+
+### AKS ####
+variable "http_application_routing_enabled" {
+  description = "(Optional) Should HTTP Application Routing be enabled?"
+  type        = bool
+  default     = false
+}
+
+variable "azure_policy_enabled" {
+  description = "(Optional) Should the Azure Policy Add-On be enabled? For more details please visit Understand Azure Policy for Azure Kubernetes Service"
+  type        = bool
+  default     = true
+}
+
+
+variable "open_service_mesh_enabled" {
+  description = "(Optional) Is Open Service Mesh enabled? For more details, please visit Open Service Mesh for AKS."
+  type        = bool
+  default     = true
+}
+
+variable "image_cleaner_enabled" {
+  description = "(Optional) Specifies whether Image Cleaner is enabled."
+  type        = bool
+  default     = true
+}
+
+
+variable "vertical_pod_autoscaler_enabled" {
+  description = "(Optional) Specifies whether Vertical Pod Autoscaler should be enabled."
+  type        = bool
+  default     = true
+}
+
+variable "workload_identity_enabled" {
+  description = "(Optional) Specifies whether Azure AD Workload Identity should be enabled for the Cluster. Defaults to false."
+  type        = bool
+  default     = true
+}
+
+variable "oidc_issuer_enabled" {
+  description = "(Optional) Enable or Disable the OIDC issuer URL."
+  type        = bool
+  default     = true
+}
+
+variable "keda_enabled" {
+  description = "(Optional) Specifies whether KEDA Autoscaler can be used for workloads."
+  type        = bool
+  default     = false
+}
