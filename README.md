@@ -28,3 +28,21 @@ The following picture provides an overview of the architecture on Azure:
     - script_storage_account_name
     - script_storage_account_key
 - Change the variables according to your needs in the variables file
+
+## Deployment images
+
+### bacloud_aks_hub_resource_group
+
+<img src="./images/bacloud_hub_resource_group.jpg" alt="Hub" width="1200"/>
+
+### bacloud_aks_resource_group
+
+<img src="./images/bacloud_aks_resource_group.jpg" alt="AKS" width="1200"/>
+
+### bacloud_aks_infra_resource_group
+
+<img src="./images/bacloud_aks_infra_rg.jpg" alt="AKS_INFRA" width="1200"/>
+
+### bacloud_other_resource_group
+
+<img src="./images/bacloud-other-rg.jpg" alt="OTHER" width="1200"/>
