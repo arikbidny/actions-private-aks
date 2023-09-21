@@ -656,8 +656,7 @@ variable "script_storage_account_name" {
 }
 
 variable "script_storage_account_key" {
-  description = "(Required) Specifies the name of the storage account that contains the custom script."
-  default     = "bacloudscriptstorage"
+  description = "(Required) Specifies the key of the storage account that contains the custom script."
   type        = string
 }
 

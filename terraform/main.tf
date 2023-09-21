@@ -269,4 +269,171 @@ module "bastion_host" {
   log_analytics_workspace_id = module.log_analytics_workspace.id
 }
 
-#https://github.com/Azure-Samples/private-aks-cluster-terraform-devops/blob/main/terraform/modules/aks/variables.tf
+
+######### VIRTUAL MACHINE #############
+module "virtual_machine" {
+  source                              = "./modules/virtual_machine"
+  name                                = var.vm_name
+  size                                = var.vm_size
+  location                            = var.location
+  public_ip                           = var.vm_public_ip
+  vm_user                             = var.admin_username
+  admin_ssh_public_key                = var.ssh_public_key
+  os_disk_image                       = var.vm_os_disk_image
+  domain_name_label                   = var.domain_name_label
+  resource_group_name                 = azurerm_resource_group.rg.name
+  subnet_id                           = module.aks_network.subnet_ids[var.vm_subnet_name]
+  os_disk_storage_account_type        = var.vm_os_disk_storage_account_type
+  boot_diagnostics_storage_account    = module.storage_account.primary_blob_endpoint
+  log_analytics_workspace_id          = module.log_analytics_workspace.workspace_id
+  log_analytics_workspace_key         = module.log_analytics_workspace.primary_shared_key
+  log_analytics_workspace_resource_id = module.log_analytics_workspace.id
+  script_storage_account_name         = var.script_storage_account_name
+  script_storage_account_key          = var.script_storage_account_key
+  container_name                      = var.container_name
+  script_name                         = var.script_name
+}
+
+
+######### Add Another Node Pool to AKS Cluster #############
+module "node_pool" {
+  source                 = "./modules/node_pool"
+  resource_group_name    = azurerm_resource_group.aks_rg.name
+  kubernetes_cluster_id  = module.aks_cluster.id
+  name                   = var.additional_node_pool_name
+  vm_size                = var.additional_node_pool_vm_size
+  mode                   = var.additional_node_pool_mode
+  node_labels            = var.additional_node_pool_node_labels
+  node_taints            = var.additional_node_pool_node_taints
+  availability_zones     = var.additional_node_pool_availability_zones
+  vnet_subnet_id         = module.aks_network.subnet_ids[var.additional_node_pool_subnet_name]
+  enable_auto_scaling    = var.additional_node_pool_enable_auto_scaling
+  enable_host_encryption = var.additional_node_pool_enable_host_encryption
+  enable_node_public_ip  = var.additional_node_pool_enable_node_public_ip
+  orchestrator_version   = var.kubernetes_version
+  max_pods               = var.additional_node_pool_max_pods
+  max_count              = var.additional_node_pool_max_count
+  min_count              = var.additional_node_pool_min_count
+  node_count             = var.additional_node_pool_node_count
+  os_type                = var.additional_node_pool_os_type
+  priority               = var.additional_node_pool_priority
+  tags                   = var.tags
+
+  depends_on = [module.routetable]
+}
+
+
+############## KEY VAULT ##########################
+module "key_vault" {
+  source                          = "./modules/key_vault"
+  name                            = var.key_vault_name
+  location                        = var.location
+  resource_group_name             = azurerm_resource_group.rg.name
+  tenant_id                       = data.azurerm_client_config.current.tenant_id
+  sku_name                        = var.key_vault_sku_name
+  tags                            = var.tags
+  enabled_for_deployment          = var.key_vault_enabled_for_deployment
+  enabled_for_disk_encryption     = var.key_vault_enabled_for_disk_encryption
+  enabled_for_template_deployment = var.key_vault_enabled_for_template_deployment
+  enable_rbac_authorization       = var.key_vault_enable_rbac_authorization
+  purge_protection_enabled        = var.key_vault_purge_protection_enabled
+  soft_delete_retention_days      = var.key_vault_soft_delete_retention_days
+  bypass                          = var.key_vault_bypass
+  default_action                  = var.key_vault_default_action
+  log_analytics_workspace_id      = module.log_analytics_workspace.id
+}
+
+module "key_vault_private_dns_zone" {
+  source              = "./modules/private_dns_zone"
+  name                = "privatelink.vaultcore.azure.net"
+  resource_group_name = azurerm_resource_group.hub_rg.name
+  virtual_networks_to_link = {
+    (module.hub_network.name) = {
+      subscription_id     = data.azurerm_client_config.current.subscription_id
+      resource_group_name = azurerm_resource_group.hub_rg.name
+    }
+    (module.aks_network.name) = {
+      subscription_id     = data.azurerm_client_config.current.subscription_id
+      resource_group_name = azurerm_resource_group.aks_rg.name
+    }
+  }
+}
+
+module "key_vault_private_endpoint" {
+  source                         = "./modules/private_endpoint"
+  name                           = "${title(module.key_vault.name)}PrivateEndpoint"
+  location                       = var.location
+  resource_group_name            = azurerm_resource_group.rg.name
+  subnet_id                      = module.aks_network.subnet_ids[var.vm_subnet_name]
+  tags                           = var.tags
+  private_connection_resource_id = module.key_vault.id
+  is_manual_connection           = false
+  subresource_name               = "vault"
+  private_dns_zone_group_name    = "KeyVaultPrivateDnsZoneGroup"
+  private_dns_zone_group_ids     = [module.key_vault_private_dns_zone.id]
+}
+
+
+######### ACR PRIVATE DNS ZONE & ENDPOINT #############################
+module "acr_private_dns_zone" {
+  source              = "./modules/private_dns_zone"
+  name                = "privatelink.azurecr.io"
+  resource_group_name = azurerm_resource_group.hub_rg.name
+  virtual_networks_to_link = {
+    (module.hub_network.name) = {
+      subscription_id     = data.azurerm_client_config.current.subscription_id
+      resource_group_name = azurerm_resource_group.hub_rg.name
+    }
+    (module.aks_network.name) = {
+      subscription_id     = data.azurerm_client_config.current.subscription_id
+      resource_group_name = azurerm_resource_group.aks_rg.name
+    }
+  }
+}
+
+module "acr_private_endpoint" {
+  source                         = "./modules/private_endpoint"
+  name                           = "${module.container_registry.name}PrivateEndpoint"
+  location                       = var.location
+  resource_group_name            = azurerm_resource_group.rg.name
+  subnet_id                      = module.aks_network.subnet_ids[var.vm_subnet_name]
+  tags                           = var.tags
+  private_connection_resource_id = module.container_registry.id
+  is_manual_connection           = false
+  subresource_name               = "registry"
+  private_dns_zone_group_name    = "AcrPrivateDnsZoneGroup"
+  private_dns_zone_group_ids     = [module.acr_private_dns_zone.id]
+}
+
+
+########### BLOB PRIVATE DNS ZONE & ENDPOINT #############################
+module "blob_private_dns_zone" {
+  source              = "./modules/private_dns_zone"
+  name                = "privatelink.blob.core.windows.net"
+  resource_group_name = azurerm_resource_group.hub_rg.name
+  virtual_networks_to_link = {
+    (module.hub_network.name) = {
+      subscription_id     = data.azurerm_client_config.current.subscription_id
+      resource_group_name = azurerm_resource_group.hub_rg.name
+    }
+    (module.aks_network.name) = {
+      subscription_id     = data.azurerm_client_config.current.subscription_id
+      resource_group_name = azurerm_resource_group.aks_rg.name
+    }
+  }
+}
+
+module "blob_private_endpoint" {
+  source                         = "./modules/private_endpoint"
+  name                           = "${title(module.storage_account.name)}PrivateEndpoint"
+  location                       = var.location
+  resource_group_name            = azurerm_resource_group.rg.name
+  subnet_id                      = module.aks_network.subnet_ids[var.vm_subnet_name]
+  tags                           = var.tags
+  private_connection_resource_id = module.storage_account.id
+  is_manual_connection           = false
+  subresource_name               = "blob"
+  private_dns_zone_group_name    = "BlobPrivateDnsZoneGroup"
+  private_dns_zone_group_ids     = [module.blob_private_dns_zone.id]
+}
+
