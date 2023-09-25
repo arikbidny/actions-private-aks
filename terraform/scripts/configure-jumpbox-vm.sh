@@ -21,3 +21,18 @@ sudo curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/maste
 
 # Install Azure CLI (latest)
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+# Install kubelogin plugin for authentication
+# install asdf tool manager
+sudo git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2
+
+sudo echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc
+
+sudo source ~/.bashrc
+
+# install unzip
+sudo apt-get install unzip
+
+sudo asdf plugin add kubelogin
+sudo asdf install kubelogin latest
+sudo asdf global kubelogin latest
