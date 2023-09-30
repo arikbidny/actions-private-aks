@@ -5,10 +5,12 @@ jobs:
   deploy-terraform:
     runs-on: ubuntu-latest
     steps:
+      # login to azure with service principal
       - name: Log in with Azure CLI
         uses: azure/actions/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+      # Test azure connection
       - name: Azure Cli test
         uses: azure/CLI@v1
         with:
@@ -16,3 +18,20 @@ jobs:
           inlineScript: |
             az account show 
             az storage -h
+      # Check the repo
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Install terraform
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      # Terraform init
+      - name: Terraform Init
+        working-directory: ./terraform
+        run: terraform init
+
+      # Checks that all terraform configuration files adhere to a canonical format
+      - name: Terraform fmt
+        working-directory: ./terraform
+        run: terraform fmt -check
