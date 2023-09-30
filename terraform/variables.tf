@@ -725,17 +725,17 @@ variable "keda_enabled" {
 }
 
 ######### AZURE VARIABLES #########
-variable "AZURE_SUBSCRIPTION_ID" {
-  description = "value of the subscription id"
-  type        = string
-}
+# variable "AZURE_SUBSCRIPTION_ID" {
+#   description = "value of the subscription id"
+#   type        = string
+# }
 
-variable "AZURE_TENANT_ID" {
-  description = "value of the tenant id"
-  type        = string
-}
+# variable "AZURE_TENANT_ID" {
+#   description = "value of the tenant id"
+#   type        = string
+# }
 
-variable "AZURE_CLIENT_ID" {
-  description = "value of the client id"
-  type        = string
-}
+# variable "AZURE_CLIENT_ID" {
+#   description = "value of the client id"
+#   type        = string
+# }

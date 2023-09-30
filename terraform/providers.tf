@@ -1,6 +1,18 @@
+variable "AZURE_SUBSCRIPTION_ID" {
+  description = "value of the subscription id"
+}
+
+variable "AZURE_TENANT_ID" {
+  description = "value of the tenant id"
+}
+
+variable "AZURE_CLIENT_ID" {
+  description = "value of the client id"
+}
+
+
 provider "azurerm" {
-  use_oidc  = true
-  client_id = "14b46d58-2c62-4e95-bf21-2f8d8ae13788"
+  use_oidc = true
   features {
 
   }
