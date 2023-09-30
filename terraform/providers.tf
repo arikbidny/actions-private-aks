@@ -23,5 +23,6 @@ terraform {
     use_oidc             = true
     subscription_id      = "9a787734-ee5c-422e-ba06-938e14b79c31"
     tenant_id            = "34a7b585-cb55-4d8e-9f2b-37560c2fa9b9"
+    client_id            = "14b46d58-2c62-4e95-bf21-2f8d8ae13788"
   }
 }
