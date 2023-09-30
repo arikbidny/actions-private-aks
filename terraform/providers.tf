@@ -1,5 +1,6 @@
 provider "azurerm" {
-  use_oidc = true
+  use_oidc  = true
+  client_id = "14b46d58-2c62-4e95-bf21-2f8d8ae13788"
   features {
 
   }
