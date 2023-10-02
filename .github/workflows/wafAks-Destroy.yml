@@ -1,4 +1,4 @@
-name: Well architected aks on Azure
+name: Well architected aks on Azure - Destroy Terraform
 on: workflow_dispatch
 
 permissions:
@@ -39,17 +39,10 @@ jobs:
         working-directory: ./terraform
         run: terraform init
 
-      # Checks that all terraform configuration files adhere to a canonical format
-      - name: Terraform fmt
-        working-directory: ./terraform
-        run: terraform fmt -check
-
-      # Terraform plan with variables from secrets
       - name: Terrraform plan
         working-directory: ./terraform
-        run: terraform plan -out tfplan -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}" -var="script_storage_account_name=${{ secrets.SCRIPT_STORAGE_ACCOUNT_NAME }}" -var="script_storage_account_key=${{ secrets.SCRIPT_STORAGE_ACCOUNT_KEY }}"
+        run: terraform plan -destroy -out tfplan -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}" -var="script_storage_account_name=${{ secrets.SCRIPT_STORAGE_ACCOUNT_NAME }}" -var="script_storage_account_key=${{ secrets.SCRIPT_STORAGE_ACCOUNT_KEY }}"
 
-        # Terraform apply
-      - name: Terraform apply
+      - name: Terrraform Destroy
         working-directory: ./terraform
-        run: terraform apply -auto-approve tfplan
+        run: terraform destroy -auto-approved

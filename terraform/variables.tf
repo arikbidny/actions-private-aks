@@ -158,7 +158,7 @@ variable "kubernetes_version" {
 
 variable "default_node_pool_vm_size" {
   description = "Specifies the vm size of the default node pool"
-  default     = "Standard_F8s_v2"
+  default     = "Standard_D4s_v3"
   type        = string
 }
 
@@ -565,7 +565,7 @@ variable "storage_account_replication_type" {
 variable "key_vault_name" {
   description = "Specifies the name of the key vault."
   type        = string
-  default     = "bacloudAksKeyVault"
+  default     = "bacloudAksKeyVault01"
 }
 
 variable "key_vault_sku_name" {
