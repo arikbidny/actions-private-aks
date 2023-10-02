@@ -38,10 +38,10 @@ jobs:
       - name: Terraform Init
         working-directory: ./terraform
         run: terraform init
-        env:
-          TF_VAR_AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          TF_VAR_AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          TV_VAR_AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        # env:
+        #   TF_VAR_AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        #   TF_VAR_AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        #   TV_VAR_AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
 
       # Checks that all terraform configuration files adhere to a canonical format
       - name: Terraform fmt

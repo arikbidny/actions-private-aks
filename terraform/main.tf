@@ -1,8 +1,3 @@
-# terraform {
-#   backend "azurerm" {
-#   }
-# }
-
 locals {
   storage_account_prefix = "boot"
   route_table_name       = "DefaultRouteTable"
