@@ -52,6 +52,11 @@ jobs:
         working-directory: ./terraform
         run: terraform plan -out tfplan -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}" -var="script_storage_account_name=${{ secrets.SCRIPT_STORAGE_ACCOUNT_NAME }}" -var="script_storage_account_key=${{ secrets.SCRIPT_STORAGE_ACCOUNT_KEY }}"
 
+        # Terraform apply
+      - name: Terraform apply
+        working-directory: ./terraform
+        run: terraform apply -auto-approve tfplan
+
       # Generates an execution plan for Terraform
       # An exit code of 0 indicates no changes, 1 a terraform failure, 2 there are pending changes.
     #   - name: Terraform plan
