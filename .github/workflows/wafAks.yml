@@ -47,3 +47,32 @@ jobs:
       - name: Terraform fmt
         working-directory: ./terraform
         run: terraform fmt -check
+
+      - name: Terrraform plan
+        working-directory: ./terraform
+        run: terraform plan -out tfplan -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}"
+
+      # Generates an execution plan for Terraform
+      # An exit code of 0 indicates no changes, 1 a terraform failure, 2 there are pending changes.
+    #   - name: Terraform plan
+    #     id: tf-plan
+    #     working-directory: ./terraform
+    #     run: |
+    #       export exitcode=0
+    #       terraform plan -detailed-exitcode -no-color -out tfplan || export exitcode=$?
+
+    #       echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
+
+    #       if [ $exitcode -eq 1 ]; then
+    #         echo Terraform Plan Failed!
+    #         exit 1
+    #       else
+    #         exit 0
+    #       fi
+
+    # Save plan to artifacts
+    #   - name: Publish Terraform plan
+    #     uses: actions/upload-artifact@v3
+    #     with:
+    #       name: tfplan
+    #       path: ./terraform/tfplan
