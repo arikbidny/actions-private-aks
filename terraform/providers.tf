@@ -40,12 +40,12 @@ terraform {
 
   backend "azurerm" {
     resource_group_name  = "bacloud-terraform-state-rg"
-    storage_account_name = "bacloudterraformstate"
+    storage_account_name = "bacloudterraformstate01"
     container_name       = "tfstate"
     key                  = "terraform.tfstate"
     use_oidc             = true
-    subscription_id      = "9a787734-ee5c-422e-ba06-938e14b79c31"
-    tenant_id            = "34a7b585-cb55-4d8e-9f2b-37560c2fa9b9"
-    client_id            = "14b46d58-2c62-4e95-bf21-2f8d8ae13788"
+    subscription_id      = "1912699e-f189-43ca-8356-21d71c13538d"
+    tenant_id            = "62a174ac-4d1b-44ce-a7f1-af58ac99e17b"
+    client_id            = "19ebefba-02c4-4de4-bd5c-0e8f4adf9e1b"
   }
 }
