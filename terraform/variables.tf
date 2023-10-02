@@ -651,7 +651,6 @@ variable "ssh_public_key" {
 
 variable "script_storage_account_name" {
   description = "(Required) Specifies the name of the storage account that contains the custom script."
-  default     = "bacloudscriptstorage"
   type        = string
 }
 
