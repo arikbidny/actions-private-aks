@@ -26,16 +26,16 @@ curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 # install asdf tool manager
 sudo git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2
 
-sudo echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc
+# sudo echo ". $HOME/.asdf/asdf.sh" >> ~/.bashrc
 
-sudo source ~/.bashrc
+# sudo source ~/.bashrc
 
 # install unzip
 sudo apt-get install unzip
 
-sudo $HOME/.asdf/asdf.sh plugin add kubelogin
-sudo $HOME/.asdf/asdf.sh install kubelogin latest
-sudo $HOME/.asdf/asdf.sh global kubelogin latest
+# sudo $HOME/.asdf/asdf.sh plugin add kubelogin
+# sudo $HOME/.asdf/asdf.sh install kubelogin latest
+# sudo $HOME/.asdf/asdf.sh global kubelogin latest
 
 
 # sudo asdf plugin add kubelogin
