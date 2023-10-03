@@ -32,7 +32,8 @@ resource "azurerm_bastion_host" "bastion_host" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "settings" {
-  name                       = "DiagnosticsSettingsBastionHost"
+  count                      = 2
+  name                       = "DiagnosticsSettingsBastionHost-${count.index}"
   target_resource_id         = azurerm_bastion_host.bastion_host.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 
