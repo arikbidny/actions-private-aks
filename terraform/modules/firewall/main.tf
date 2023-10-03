@@ -226,7 +226,8 @@ resource "azurerm_firewall_policy_rule_collection_group" "policy" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "settings" {
-  name                       = "DiagnosticsSettingsFirewall"
+  count                      = 2
+  name                       = "DiagnosticsSettingsFirewall-${count.index}"
   target_resource_id         = azurerm_firewall.firewall.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 
