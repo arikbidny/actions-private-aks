@@ -106,7 +106,7 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
   target_resource_id         = azurerm_kubernetes_cluster.aks_cluster.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 
-  log {
+  enabled_log {
     category = "kube-apiserver"
     enabled  = true
 
@@ -115,7 +115,7 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
     }
   }
 
-  log {
+  enabled_log {
     category = "kube-audit"
     enabled  = true
 
@@ -124,7 +124,7 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
     }
   }
 
-  log {
+  enabled_log {
     category = "kube-audit-admin"
     enabled  = true
 
@@ -133,7 +133,7 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
     }
   }
 
-  log {
+  enabled_log {
     category = "kube-controller-manager"
     enabled  = true
 
@@ -142,7 +142,7 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
     }
   }
 
-  log {
+  enabled_log {
     category = "kube-scheduler"
     enabled  = true
 
@@ -151,7 +151,7 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
     }
   }
 
-  log {
+  enabled_log {
     category = "cluster-autoscaler"
     enabled  = true
 
@@ -160,7 +160,7 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
     }
   }
 
-  log {
+  enabled_log {
     category = "guard"
     enabled  = true
 

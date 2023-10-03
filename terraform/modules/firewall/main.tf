@@ -230,7 +230,7 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
   target_resource_id         = azurerm_firewall.firewall.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 
-  log {
+  enabled_log {
     category = "AzureFirewallApplicationRule"
     enabled  = true
 
@@ -239,7 +239,7 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
     }
   }
 
-  log {
+  enabled_log {
     category = "AzureFirewallNetworkRule"
     enabled  = true
 
@@ -248,7 +248,7 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
     }
   }
 
-  log {
+  enabled_log {
     category = "AzureFirewallDnsProxy"
     enabled  = true
 
@@ -271,7 +271,7 @@ resource "azurerm_monitor_diagnostic_setting" "pip_settings" {
   target_resource_id         = azurerm_public_ip.pip.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 
-  log {
+  enabled_log {
     category = "DDoSProtectionNotifications"
     enabled  = true
 
@@ -280,7 +280,7 @@ resource "azurerm_monitor_diagnostic_setting" "pip_settings" {
     }
   }
 
-  log {
+  enabled_log {
     category = "DDoSMitigationFlowLogs"
     enabled  = true
 
@@ -289,7 +289,7 @@ resource "azurerm_monitor_diagnostic_setting" "pip_settings" {
     }
   }
 
-  log {
+  enabled_log {
     category = "DDoSMitigationReports"
     enabled  = true
 
