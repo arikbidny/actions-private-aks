@@ -38,7 +38,6 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
 
   enabled_log {
     category = "BastionAuditLogs"
-    enabled  = true
 
     retention_policy {
       enabled = true
@@ -61,7 +60,6 @@ resource "azurerm_monitor_diagnostic_setting" "pip_settings" {
 
   enabled_log {
     category = "DDoSProtectionNotifications"
-    enabled  = true
 
     retention_policy {
       enabled = true
@@ -70,7 +68,6 @@ resource "azurerm_monitor_diagnostic_setting" "pip_settings" {
 
   enabled_log {
     category = "DDoSMitigationFlowLogs"
-    enabled  = true
 
     retention_policy {
       enabled = true
@@ -79,7 +76,6 @@ resource "azurerm_monitor_diagnostic_setting" "pip_settings" {
 
   enabled_log {
     category = "DDoSMitigationReports"
-    enabled  = true
 
     retention_policy {
       enabled = true

@@ -108,7 +108,6 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
 
   enabled_log {
     category = "kube-apiserver"
-    enabled  = true
 
     retention_policy {
       enabled = true
@@ -117,7 +116,6 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
 
   enabled_log {
     category = "kube-audit"
-    enabled  = true
 
     retention_policy {
       enabled = true
@@ -126,7 +124,6 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
 
   enabled_log {
     category = "kube-audit-admin"
-    enabled  = true
 
     retention_policy {
       enabled = true
@@ -135,7 +132,6 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
 
   enabled_log {
     category = "kube-controller-manager"
-    enabled  = true
 
     retention_policy {
       enabled = true
@@ -144,7 +140,6 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
 
   enabled_log {
     category = "kube-scheduler"
-    enabled  = true
 
     retention_policy {
       enabled = true
@@ -153,7 +148,6 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
 
   enabled_log {
     category = "cluster-autoscaler"
-    enabled  = true
 
     retention_policy {
       enabled = true
@@ -162,7 +156,6 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
 
   enabled_log {
     category = "guard"
-    enabled  = true
 
     retention_policy {
       enabled = true
