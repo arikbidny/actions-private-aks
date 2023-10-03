@@ -45,4 +45,4 @@ jobs:
 
       - name: Terrraform Destroy
         working-directory: ./terraform
-        run: terraform destroy -auto-approve
+        run: terraform destroy -auto-approve -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}" -var="script_storage_account_name=${{ secrets.SCRIPT_STORAGE_ACCOUNT_NAME }}" -var="script_storage_account_key=${{ secrets.SCRIPT_STORAGE_ACCOUNT_KEY }}"
