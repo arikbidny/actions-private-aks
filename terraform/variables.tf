@@ -158,7 +158,7 @@ variable "kubernetes_version" {
 
 variable "default_node_pool_vm_size" {
   description = "Specifies the vm size of the default node pool"
-  default     = "Standard_DC8_v2"
+  default     = "Standard_DC4s_v2"
   type        = string
 }
 
