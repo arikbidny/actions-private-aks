@@ -33,6 +33,11 @@ sudo source ~/.bashrc
 # install unzip
 sudo apt-get install unzip
 
-sudo asdf plugin add kubelogin
-sudo asdf install kubelogin latest
-sudo asdf global kubelogin latest
+sudo $HOME/.asdf/asdf.sh plugin add kubelogin
+sudo $HOME/.asdf/asdf.sh install kubelogin latest
+sudo $HOME/.asdf/asdf.sh global kubelogin latest
+
+
+# sudo asdf plugin add kubelogin
+# sudo asdf install kubelogin latest
+# sudo asdf global kubelogin latest
