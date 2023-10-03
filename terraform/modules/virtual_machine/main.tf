@@ -195,25 +195,25 @@ resource "azurerm_virtual_machine_extension" "dependency_agent" {
   depends_on = [azurerm_virtual_machine_extension.monitor_agent]
 }
 
-resource "azurerm_monitor_diagnostic_setting" "nsg_settings" {
-  count                      = 2
-  name                       = "DiagnosticsSettingsVM-${count.index}"
-  target_resource_id         = azurerm_network_security_group.nsg.id
-  log_analytics_workspace_id = var.log_analytics_workspace_resource_id
+# resource "azurerm_monitor_diagnostic_setting" "nsg_settings" {
+#   count                      = 2
+#   name                       = "DiagnosticsSettingsVM-${count.index}"
+#   target_resource_id         = azurerm_network_security_group.nsg.id
+#   log_analytics_workspace_id = var.log_analytics_workspace_resource_id
 
-  enabled_log {
-    category = "NetworkSecurityGroupEvent"
+#   enabled_log {
+#     category = "NetworkSecurityGroupEvent"
 
-    retention_policy {
-      enabled = true
-    }
-  }
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
 
-  enabled_log {
-    category = "NetworkSecurityGroupRuleCounter"
+#   enabled_log {
+#     category = "NetworkSecurityGroupRuleCounter"
 
-    retention_policy {
-      enabled = true
-    }
-  }
-}
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
+# }

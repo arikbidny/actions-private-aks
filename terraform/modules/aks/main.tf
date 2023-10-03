@@ -101,73 +101,73 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   }
 }
 
-resource "azurerm_monitor_diagnostic_setting" "settings" {
-  count                      = 2
-  name                       = "DiagnosticsSettingsAKS-${count.index}"
-  target_resource_id         = azurerm_kubernetes_cluster.aks_cluster.id
-  log_analytics_workspace_id = var.log_analytics_workspace_id
+# resource "azurerm_monitor_diagnostic_setting" "settings" {
+#   count                      = 2
+#   name                       = "DiagnosticsSettingsAKS-${count.index}"
+#   target_resource_id         = azurerm_kubernetes_cluster.aks_cluster.id
+#   log_analytics_workspace_id = var.log_analytics_workspace_id
 
-  enabled_log {
-    category = "kube-apiserver"
+#   enabled_log {
+#     category = "kube-apiserver"
 
-    retention_policy {
-      enabled = true
-    }
-  }
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
 
-  enabled_log {
-    category = "kube-audit"
+#   enabled_log {
+#     category = "kube-audit"
 
-    retention_policy {
-      enabled = true
-    }
-  }
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
 
-  enabled_log {
-    category = "kube-audit-admin"
+#   enabled_log {
+#     category = "kube-audit-admin"
 
-    retention_policy {
-      enabled = true
-    }
-  }
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
 
-  enabled_log {
-    category = "kube-controller-manager"
+#   enabled_log {
+#     category = "kube-controller-manager"
 
-    retention_policy {
-      enabled = true
-    }
-  }
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
 
-  enabled_log {
-    category = "kube-scheduler"
+#   enabled_log {
+#     category = "kube-scheduler"
 
-    retention_policy {
-      enabled = true
-    }
-  }
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
 
-  enabled_log {
-    category = "cluster-autoscaler"
+#   enabled_log {
+#     category = "cluster-autoscaler"
 
-    retention_policy {
-      enabled = true
-    }
-  }
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
 
-  enabled_log {
-    category = "guard"
+#   enabled_log {
+#     category = "guard"
 
-    retention_policy {
-      enabled = true
-    }
-  }
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
 
-  metric {
-    category = "AllMetrics"
+#   metric {
+#     category = "AllMetrics"
 
-    retention_policy {
-      enabled = true
-    }
-  }
-}
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
+# }

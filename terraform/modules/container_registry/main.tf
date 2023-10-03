@@ -43,33 +43,33 @@ resource "azurerm_user_assigned_identity" "acr_identity" {
   }
 }
 
-resource "azurerm_monitor_diagnostic_setting" "settings" {
-  count                      = 2
-  name                       = "DiagnosticsSettingsRegistry-${count.index}"
-  target_resource_id         = azurerm_container_registry.acr.id
-  log_analytics_workspace_id = var.log_analytics_workspace_id
+# resource "azurerm_monitor_diagnostic_setting" "settings" {
+#   count                      = 2
+#   name                       = "DiagnosticsSettingsRegistry-${count.index}"
+#   target_resource_id         = azurerm_container_registry.acr.id
+#   log_analytics_workspace_id = var.log_analytics_workspace_id
 
-  enabled_log {
-    category = "ContainerRegistryRepositoryEvents"
+#   enabled_log {
+#     category = "ContainerRegistryRepositoryEvents"
 
-    retention_policy {
-      enabled = true
-    }
-  }
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
 
-  enabled_log {
-    category = "ContainerRegistryLoginEvents"
+#   enabled_log {
+#     category = "ContainerRegistryLoginEvents"
 
-    retention_policy {
-      enabled = true
-    }
-  }
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
 
-  metric {
-    category = "AllMetrics"
+#   metric {
+#     category = "AllMetrics"
 
-    retention_policy {
-      enabled = true
-    }
-  }
-}
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
+# }

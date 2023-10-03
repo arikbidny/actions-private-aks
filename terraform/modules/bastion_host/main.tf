@@ -31,64 +31,64 @@ resource "azurerm_bastion_host" "bastion_host" {
   }
 }
 
-resource "azurerm_monitor_diagnostic_setting" "settings" {
-  count                      = 2
-  name                       = "DiagnosticsSettingsBastionHost-${count.index}"
-  target_resource_id         = azurerm_bastion_host.bastion_host.id
-  log_analytics_workspace_id = var.log_analytics_workspace_id
+# resource "azurerm_monitor_diagnostic_setting" "settings" {
+#   count                      = 2
+#   name                       = "DiagnosticsSettingsBastionHost-${count.index}"
+#   target_resource_id         = azurerm_bastion_host.bastion_host.id
+#   log_analytics_workspace_id = var.log_analytics_workspace_id
 
-  enabled_log {
-    category = "BastionAuditLogs"
+#   enabled_log {
+#     category = "BastionAuditLogs"
 
-    retention_policy {
-      enabled = true
-    }
-  }
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
 
-  metric {
-    category = "AllMetrics"
+#   metric {
+#     category = "AllMetrics"
 
-    retention_policy {
-      enabled = true
-    }
-  }
-}
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
+# }
 
-resource "azurerm_monitor_diagnostic_setting" "pip_settings" {
-  count                      = 2
-  name                       = "DiagnosticsSettingsMonitor-${count.index}"
-  target_resource_id         = azurerm_public_ip.public_ip.id
-  log_analytics_workspace_id = var.log_analytics_workspace_id
+# resource "azurerm_monitor_diagnostic_setting" "pip_settings" {
+#   count                      = 2
+#   name                       = "DiagnosticsSettingsMonitor-${count.index}"
+#   target_resource_id         = azurerm_public_ip.public_ip.id
+#   log_analytics_workspace_id = var.log_analytics_workspace_id
 
-  enabled_log {
-    category = "DDoSProtectionNotifications"
+#   enabled_log {
+#     category = "DDoSProtectionNotifications"
 
-    retention_policy {
-      enabled = true
-    }
-  }
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
 
-  enabled_log {
-    category = "DDoSMitigationFlowLogs"
+#   enabled_log {
+#     category = "DDoSMitigationFlowLogs"
 
-    retention_policy {
-      enabled = true
-    }
-  }
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
 
-  enabled_log {
-    category = "DDoSMitigationReports"
+#   enabled_log {
+#     category = "DDoSMitigationReports"
 
-    retention_policy {
-      enabled = true
-    }
-  }
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
 
-  metric {
-    category = "AllMetrics"
+#   metric {
+#     category = "AllMetrics"
 
-    retention_policy {
-      enabled = true
-    }
-  }
-}
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
+# }

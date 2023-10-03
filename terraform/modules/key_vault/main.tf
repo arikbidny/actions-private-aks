@@ -30,33 +30,33 @@ resource "azurerm_key_vault" "key_vault" {
   }
 }
 
-resource "azurerm_monitor_diagnostic_setting" "settings" {
-  count                      = 2
-  name                       = "DiagnosticsSettingsKeyVault-${count.index}"
-  target_resource_id         = azurerm_key_vault.key_vault.id
-  log_analytics_workspace_id = var.log_analytics_workspace_id
+# resource "azurerm_monitor_diagnostic_setting" "settings" {
+#   count                      = 2
+#   name                       = "DiagnosticsSettingsKeyVault-${count.index}"
+#   target_resource_id         = azurerm_key_vault.key_vault.id
+#   log_analytics_workspace_id = var.log_analytics_workspace_id
 
-  enabled_log {
-    category = "AuditEvent"
+#   enabled_log {
+#     category = "AuditEvent"
 
-    retention_policy {
-      enabled = true
-    }
-  }
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
 
-  enabled_log {
-    category = "AzurePolicyEvaluationDetails"
+#   enabled_log {
+#     category = "AzurePolicyEvaluationDetails"
 
-    retention_policy {
-      enabled = true
-    }
-  }
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
 
-  metric {
-    category = "AllMetrics"
+#   metric {
+#     category = "AllMetrics"
 
-    retention_policy {
-      enabled = true
-    }
-  }
-}
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
+# }

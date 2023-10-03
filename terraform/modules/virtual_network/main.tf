@@ -23,25 +23,25 @@ resource "azurerm_subnet" "subnet" {
   enforce_private_link_service_network_policies  = each.value.enforce_private_link_service_network_policies
 }
 
-resource "azurerm_monitor_diagnostic_setting" "settings" {
-  count                      = 2
-  name                       = "DiagnosticsSettingsVirtualNetwork-${count.index}"
-  target_resource_id         = azurerm_virtual_network.vnet.id
-  log_analytics_workspace_id = var.log_analytics_workspace_id
+# resource "azurerm_monitor_diagnostic_setting" "settings" {
+#   count                      = 2
+#   name                       = "DiagnosticsSettingsVirtualNetwork-${count.index}"
+#   target_resource_id         = azurerm_virtual_network.vnet.id
+#   log_analytics_workspace_id = var.log_analytics_workspace_id
 
-  enabled_log {
-    category = "VMProtectionAlerts"
+#   enabled_log {
+#     category = "VMProtectionAlerts"
 
-    retention_policy {
-      enabled = true
-    }
-  }
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
 
-  metric {
-    category = "AllMetrics"
+#   metric {
+#     category = "AllMetrics"
 
-    retention_policy {
-      enabled = true
-    }
-  }
-}
+#     retention_policy {
+#       enabled = true
+#     }
+#   }
+# }
