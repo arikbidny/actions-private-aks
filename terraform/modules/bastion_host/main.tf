@@ -32,7 +32,7 @@ resource "azurerm_bastion_host" "bastion_host" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "settings" {
-  name                       = "DiagnosticsSettings"
+  name                       = "DiagnosticsSettingsBastionHost"
   target_resource_id         = azurerm_bastion_host.bastion_host.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 
@@ -55,7 +55,7 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "pip_settings" {
-  name                       = "DiagnosticsSettings"
+  name                       = "DiagnosticsSettingsMonitor"
   target_resource_id         = azurerm_public_ip.public_ip.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 
