@@ -54,7 +54,8 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "pip_settings" {
-  name                       = "DiagnosticsSettingsMonitor"
+  count                      = 2
+  name                       = "DiagnosticsSettingsMonitor-${count.index}"
   target_resource_id         = azurerm_public_ip.public_ip.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 

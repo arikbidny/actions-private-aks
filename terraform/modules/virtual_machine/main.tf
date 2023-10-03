@@ -196,7 +196,8 @@ resource "azurerm_virtual_machine_extension" "dependency_agent" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "nsg_settings" {
-  name                       = "DiagnosticsSettingsVM"
+  count                      = 2
+  name                       = "DiagnosticsSettingsVM-${count.index}"
   target_resource_id         = azurerm_network_security_group.nsg.id
   log_analytics_workspace_id = var.log_analytics_workspace_resource_id
 

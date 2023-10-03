@@ -264,7 +264,8 @@ resource "azurerm_monitor_diagnostic_setting" "settings" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "pip_settings" {
-  name                       = "DiagnosticsSettingsFirewallDDos"
+  count                      = 2
+  name                       = "DiagnosticsSettingsFirewallDDos-${count.index}"
   target_resource_id         = azurerm_public_ip.pip.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 

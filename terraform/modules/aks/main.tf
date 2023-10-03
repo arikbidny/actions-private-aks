@@ -102,7 +102,8 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "settings" {
-  name                       = "DiagnosticsSettingsAKS"
+  count                      = 2
+  name                       = "DiagnosticsSettingsAKS-${count.index}"
   target_resource_id         = azurerm_kubernetes_cluster.aks_cluster.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 

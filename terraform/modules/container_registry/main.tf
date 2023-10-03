@@ -44,7 +44,8 @@ resource "azurerm_user_assigned_identity" "acr_identity" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "settings" {
-  name                       = "DiagnosticsSettingsRegistry"
+  count                      = 2
+  name                       = "DiagnosticsSettingsRegistry-${count.index}"
   target_resource_id         = azurerm_container_registry.acr.id
   log_analytics_workspace_id = var.log_analytics_workspace_id
 
