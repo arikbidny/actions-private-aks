@@ -565,7 +565,7 @@ variable "storage_account_replication_type" {
 variable "key_vault_name" {
   description = "Specifies the name of the key vault."
   type        = string
-  default     = "bacloudAksKeyVault01"
+  default     = "bacloudAksKeyVault02"
 }
 
 variable "key_vault_sku_name" {
@@ -722,19 +722,3 @@ variable "keda_enabled" {
   type        = bool
   default     = false
 }
-
-######### AZURE VARIABLES #########
-# variable "AZURE_SUBSCRIPTION_ID" {
-#   description = "value of the subscription id"
-#   type        = string
-# }
-
-# variable "AZURE_TENANT_ID" {
-#   description = "value of the tenant id"
-#   type        = string
-# }
-
-# variable "AZURE_CLIENT_ID" {
-#   description = "value of the client id"
-#   type        = string
-# }

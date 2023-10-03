@@ -80,7 +80,7 @@ then
     sleep 30s
 
     echo "Creating role assignment..."
-    az role assignment create --role contributor --subscription $SUB_ID --assignee-object-id $SP_ID --assignee-principal-type ServicePrincipal
+    az role assignment create --role owner --subscription $SUB_ID --assignee-object-id $SP_ID --assignee-principal-type ServicePrincipal
     sleep 30s
 else
     echo "Existing Service Principal found."
