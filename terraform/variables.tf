@@ -456,7 +456,7 @@ variable "vm_public_ip" {
 
 variable "vm_size" {
   description = "Specifies the size of the jumpbox virtual machine"
-  default     = "Standard_D4d_v5"
+  default     = "Standard_DS2_v2"
   type        = string
 }
 
