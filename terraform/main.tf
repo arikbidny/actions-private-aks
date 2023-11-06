@@ -232,12 +232,6 @@ resource "azurerm_role_assignment" "acr_pull" {
   skip_service_principal_aad_check = true
 }
 
-resource "azurerm_role_assignment" "aks_cluster_admin" {
-  scope                = azurerm_kubernetes_cluster.aks_cluster.id
-  role_definition_name = "Azure Kubernetes Service Cluster Admin Role"
-  principal_id         = "45e97aa4-b4fd-4b78-b23e-b16ac44643d3"
-}
-
 
 ###### GENERATE RANDOM STRING FOR VIRTUAL MACHINE ###########
 # Generate randon name for virtual machine and storage account

@@ -101,6 +101,13 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   }
 }
 
+
+resource "azurerm_role_assignment" "aks_cluster_admin" {
+  scope                = azurerm_kubernetes_cluster.aks_cluster.id
+  role_definition_name = "Azure Kubernetes Service Cluster Admin Role"
+  principal_id         = "45e97aa4-b4fd-4b78-b23e-b16ac44643d3"
+}
+
 # resource "azurerm_monitor_diagnostic_setting" "settings" {
 #   count                      = 2
 #   name                       = "DiagnosticsSettingsAKS-${count.index}"
